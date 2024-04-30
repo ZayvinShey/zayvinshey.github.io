@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 
 
-<html theme="dark" showBanner="true" hasBanner="false" > 
+<html theme="dark" showBanner="true" hasBanner="true" > 
 <link href="https://cdn.staticfile.org/font-awesome/6.4.2/css/fontawesome.min.css" rel="stylesheet">
 <link href="https://cdn.staticfile.org/font-awesome/6.4.2/css/brands.min.css" rel="stylesheet">
 <link href="https://cdn.staticfile.org/font-awesome/6.4.2/css/solid.min.css" rel="stylesheet">
@@ -48,6 +48,13 @@
 
 <body>
   
+  
+    
+<div id="banner" class=" is_home ">
+  <img src="/images/wallhaven-5wq8x8.jpg" itemprop="image">
+  <div id="banner-dim"></div>
+</div>
+ 
    
   <div id="main-grid" class="  ">
     <div id="nav" class=" is_home "  >
@@ -116,19 +123,21 @@
   <div class="info-card">
     <div class="avatar">
       
+        <image src=/images/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20240430115746.jpg></image>
+      
       <div class="img-dim"></div>
     </div>
     <div class="info">
-      <div class="username">Your Name </div>
+      <div class="username">ZayvinShey </div>
       <div class="dot"></div>
-      <div class="subtitle">This is the subtitle </div>
+      <div class="subtitle">生生不息 | Have a nice day </div>
       <div class="link-list">
         
-          <a class="link-btn" target="_blank" rel="noopener" href="https://twitter.com" title="Twitter"><i class="fa-brands fa-twitter"></i></a>
+          <a class="link-btn" target="_blank" rel="noopener" href="https://hub.docker.com/u/zayvinshey" title="Docker"><i class="fa-brands fa-docker"></i></a>
         
-          <a class="link-btn" target="_blank" rel="noopener" href="https://store.steampowered.com" title="Steam"><i class="fa-brands fa-steam"></i></a>
+          <a class="link-btn" target="_blank" rel="noopener" href="https://steamcommunity.com/profiles/76561199386889363/" title="Steam"><i class="fa-brands fa-steam"></i></a>
         
-          <a class="link-btn" target="_blank" rel="noopener" href="https://github.com" title="GitHub"><i class="fa-brands fa-github"></i></a>
+          <a class="link-btn" target="_blank" rel="noopener" href="https://github.com/ZayvinShey" title="GitHub"><i class="fa-brands fa-github"></i></a>
          
       </div>  
     </div>
@@ -146,6 +155,39 @@
       
 
     
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">归档</h3>
+      
+      
+        <a class="archive-link" href="/archives/2024/04 ">
+          四月 2024 
+          <div class="archive-count">1 </div>
+        </a>
+      
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget-wrap">
+    <div class="widget">
+      <h3 class="widget-title">最新文章</h3>
+      <ul>
+        
+          <a class="recent-link" href="/2024/04/30/ARP%E6%AC%BA%E9%AA%97/" title="ARP欺骗" >
+            <div class="recent-link-text">
+              ARP欺骗
+            </div>
+          </a>
+        
+      </ul>
+    </div>
+  </div>
+
+    
   </div>
 </sidebar>
     </div>
@@ -154,7 +196,7 @@
    
 
 
-<article id="post-hello-world" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+<article id="post-ARP欺骗" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
    
   <div class="article-inner">
     <div class="article-main">
@@ -165,7 +207,7 @@
   
     
       <h1 itemprop="name">
-        <a class="p-name article-title" href="/2024/04/30/hello-world/">Hello World</a>
+        <a class="p-name article-title" href="/2024/04/30/ARP%E6%AC%BA%E9%AA%97/">ARP欺骗</a>
       </h1>
     
   
@@ -173,7 +215,7 @@
 
         <div class='meta-info-bar'>
           <div class="meta-info">
-  <time class="dt-published" datetime="2024-04-30T04:05:33.511Z" itemprop="datePublished">2024-04-30</time>
+  <time class="dt-published" datetime="2024-04-30T05:59:54.000Z" itemprop="datePublished">2024-04-30</time>
 </div>
           <div class="need-seperator meta-info">
             <div class="meta-cate-flex">
@@ -184,7 +226,7 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            367 词 
+            1.3k 词 
           </div>
         </div>
         
@@ -193,20 +235,9 @@
         
           <div class="truncate-text">
             
-              Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick StartCreate a new post1$ hexo new &quot;My New Post&quot;
-
-More info: Writing
-Run server1$ hexo server
-
-More info: Server
-Generate static files1$ hexo generate
-
-More info: Generating
-Deploy to remote sites1$ hexo deploy
-
-More info: Deployment
-
+              ARP 欺骗注意：本文只用于演示和学习，不能在未经允许的情况对任何设备执行本实验。ARP协议在以太网协议中规定，同一局域网中的一台主机要和另一台主机进行直接通信，必须要知道目标主机的MAC地址。而在TCP&#x2F;IP协议中，网络层和传输层只关心目标主机的IP地址。这就导致在以太网中使用IP协议时，数据链路层的以太网协议接到上层IP协议提供的数据中，只包含目的主机的IP地址。于是需要一种方法，根据目的主机的IP地址，获得其MAC地址。这就是ARP协议要做的事情。所谓地址解析（address resolution）就是主机在发送帧前将目标IP地址转换成目标MAC地址的过程。
+简单来讲 在局域网内通讯使用的是MAC地址，而不是IP地址。所以在一个局域网内两台设备需要相互通信必须要知道各自的MAC地址，ARP协议就是将IP地址转换成MAC地址的过程
+然后我们需要知道什么是ARP欺骗（ARP Spoofing）又称ARP病毒或者ARP攻击。是针对以太网地址解析协议（ARP）的一种攻击技术。此种攻击可让攻击者获取局域网上的数据包甚至可篡改数据包，且可让网络上特定设备或所有设备断开互联网。...
             
           </div>
         
@@ -218,7 +249,7 @@ More info: Deployment
      
     <a class="right-panel  non-pic  "
       
-      href="/2024/04/30/hello-world/" 
+      href="/2024/04/30/ARP%E6%AC%BA%E9%AA%97/" 
     >
        
       <i class="fa-solid fa-angle-right non-pic"></i>
@@ -243,7 +274,7 @@ More info: Deployment
   
   <div id="footer-info" class="inner">
     
-    &copy; 2024 Your Name<br>
+    &copy; 2024 ZayvinShey<br>
     Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & Theme <a target="_blank" rel="noopener" href="https://github.com/saicaca/hexo-theme-vivia">Vivia</a>
   </div>
 </footer>

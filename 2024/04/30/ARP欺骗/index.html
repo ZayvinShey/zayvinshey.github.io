@@ -14,21 +14,28 @@
   
 
   
-  <title>about | ZayvinShey&#39;s Blog</title>
+  <title>ARP欺骗 | ZayvinShey&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <link rel="preload" href="/css/fonts/Roboto-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
   <link rel="preload" href="/css/fonts/Roboto-Bold.ttf" as="font" type="font/ttf" crossorigin="anonymous">
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="about">
-<meta property="og:url" content="https://zayvinshey.github.io/about/index.html">
+  <meta name="description" content="ARP 欺骗注意：本文只用于演示和学习，不能在未经允许的情况对任何设备执行本实验。ARP协议在以太网协议中规定，同一局域网中的一台主机要和另一台主机进行直接通信，必须要知道目标主机的MAC地址。而在TCP&#x2F;IP协议中，网络层和传输层只关心目标主机的IP地址。这就导致在以太网中使用IP协议时，数据链路层的以太网协议接到上层IP协议提供的数据中，只包含目的主机的IP地址。于是需要一种方法，根">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ARP欺骗">
+<meta property="og:url" content="https://zayvinshey.github.io/2024/04/30/ARP%E6%AC%BA%E9%AA%97/index.html">
 <meta property="og:site_name" content="ZayvinShey&#39;s Blog">
+<meta property="og:description" content="ARP 欺骗注意：本文只用于演示和学习，不能在未经允许的情况对任何设备执行本实验。ARP协议在以太网协议中规定，同一局域网中的一台主机要和另一台主机进行直接通信，必须要知道目标主机的MAC地址。而在TCP&#x2F;IP协议中，网络层和传输层只关心目标主机的IP地址。这就导致在以太网中使用IP协议时，数据链路层的以太网协议接到上层IP协议提供的数据中，只包含目的主机的IP地址。于是需要一种方法，根">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-04-30T04:58:54.000Z">
-<meta property="article:modified_time" content="2024-04-30T04:58:54.898Z">
+<meta property="og:image" content="https://zayvinshey.github.io/2024/04/30/ARP%E6%AC%BA%E9%AA%97/image-1.png">
+<meta property="og:image" content="https://zayvinshey.github.io/2024/04/30/ARP%E6%AC%BA%E9%AA%97/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202024-04-30%20173243.png">
+<meta property="og:image" content="https://zayvinshey.github.io/2024/04/30/ARP%E6%AC%BA%E9%AA%97/image-3.png">
+<meta property="og:image" content="https://zayvinshey.github.io/2024/04/30/ARP%E6%AC%BA%E9%AA%97/image-4.png">
+<meta property="article:published_time" content="2024-04-30T05:59:54.000Z">
+<meta property="article:modified_time" content="2024-04-30T11:19:54.179Z">
 <meta property="article:tag" content="zh-CN">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://zayvinshey.github.io/2024/04/30/ARP%E6%AC%BA%E9%AA%97/image-1.png">
   
     <link rel="alternate" href="/atom.xml" title="ZayvinShey's Blog" type="application/atom+xml">
   
@@ -197,7 +204,9 @@
        
 
 
-<article id="page-" class="h-entry article article-type-page" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+<article id="post-ARP欺骗" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+    
    
   <div class="article-inner">
     <div class="article-main">
@@ -208,7 +217,7 @@
   
     
       <h1 class="p-name article-title" itemprop="headline name">
-        about
+        ARP欺骗
       </h1>
     
   
@@ -216,7 +225,7 @@
 
         <div class='meta-info-bar'>
           <div class="meta-info">
-  <time class="dt-published" datetime="2024-04-30T04:58:54.000Z" itemprop="datePublished">2024-04-30</time>
+  <time class="dt-published" datetime="2024-04-30T05:59:54.000Z" itemprop="datePublished">2024-04-30</time>
 </div>
           <div class="need-seperator meta-info">
             <div class="meta-cate-flex">
@@ -227,14 +236,26 @@
   
           </div>
           <div class="wordcount need-seperator meta-info">
-            0 词 
+            1.3k 词 
           </div>
         </div>
         
       </header>
       <div class="e-content article-entry" itemprop="articleBody">
         
-          
+          <h1 id="ARP-欺骗"><a href="#ARP-欺骗" class="headerlink" title="ARP 欺骗"></a>ARP 欺骗</h1><h2 id="注意：本文只用于演示和学习，不能在未经允许的情况对任何设备执行本实验。"><a href="#注意：本文只用于演示和学习，不能在未经允许的情况对任何设备执行本实验。" class="headerlink" title="注意：本文只用于演示和学习，不能在未经允许的情况对任何设备执行本实验。"></a><strong>注意：本文只用于演示和学习，不能在未经允许的情况对任何设备执行本实验。</strong></h2><h2 id="ARP协议"><a href="#ARP协议" class="headerlink" title="ARP协议"></a>ARP协议</h2><p>在以太网协议中规定，同一局域网中的一台主机要和另一台主机进行直接通信，必须要知道目标主机的MAC地址。而在TCP&#x2F;IP协议中，网络层和传输层只关心目标主机的IP地址。这就导致在以太网中使用IP协议时，数据链路层的以太网协议接到上层IP协议提供的数据中，只包含目的主机的IP地址。于是需要一种方法，根据目的主机的IP地址，获得其MAC地址。这就是ARP协议要做的事情。所谓地址解析（address resolution）就是主机在发送帧前将目标IP地址转换成目标MAC地址的过程。</p>
+<p>简单来讲 在局域网内通讯使用的是MAC地址，而不是IP地址。所以在一个局域网内两台设备需要相互通信必须要知道各自的MAC地址，ARP协议就是将IP地址转换成MAC地址的过程</p>
+<h3 id="然后我们需要知道什么是ARP欺骗（ARP-Spoofing）又称ARP病毒或者ARP攻击。是针对以太网地址解析协议（ARP）的一种攻击技术。此种攻击可让攻击者获取局域网上的数据包甚至可篡改数据包，且可让网络上特定设备或所有设备断开互联网。-再次声明本次实验不能在未经允许的情况下对任何设备进行攻击否则后果自负。"><a href="#然后我们需要知道什么是ARP欺骗（ARP-Spoofing）又称ARP病毒或者ARP攻击。是针对以太网地址解析协议（ARP）的一种攻击技术。此种攻击可让攻击者获取局域网上的数据包甚至可篡改数据包，且可让网络上特定设备或所有设备断开互联网。-再次声明本次实验不能在未经允许的情况下对任何设备进行攻击否则后果自负。" class="headerlink" title="然后我们需要知道什么是ARP欺骗（ARP Spoofing）又称ARP病毒或者ARP攻击。是针对以太网地址解析协议（ARP）的一种攻击技术。此种攻击可让攻击者获取局域网上的数据包甚至可篡改数据包，且可让网络上特定设备或所有设备断开互联网。 (再次声明本次实验不能在未经允许的情况下对任何设备进行攻击否则后果自负。)"></a>然后我们需要知道什么是ARP欺骗（ARP Spoofing）又称ARP病毒或者ARP攻击。是针对以太网地址解析协议（ARP）的一种攻击技术。此种攻击可让攻击者获取局域网上的数据包甚至可篡改数据包，且可让网络上特定设备或所有设备断开互联网。 (再次声明本次实验不能在未经允许的情况下对任何设备进行攻击否则后果自负。)</h3><p>本次实验使用 VMware Workstation Pro 创建虚拟机 分别为 攻击机kali-linux-2024-1和被攻击设备</p>
+<p>首先我们需要知道kali连接的网段是多少 使用这条命令可以知道kali所在的网段IP</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ip a</span><br></pre></td></tr></table></figure>
+<p><img src="image-1.png" alt="1"><br>192.168.0.103是路由器给kali自动分配的IP地址，只要是连接这个路由器的设备他们的IP地址都是192.168.0.X。<br>sss<br>我们可以使用这条命令扫描出来</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo nmap 192.168.0.0-255</span><br><span class="line"># 这条命令的意思是使用nmap命令扫描192.168.0.0到192.168.0.255之间的所有设备</span><br></pre></td></tr></table></figure>
+<p> 现在可以看到虽然显示的是未知设备但是可以看到192.168.0.105就是我的IQOO手机<br> <img src="%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202024-04-30%20173243.png" alt="2"></p>
+<h2 id="接下来我会让这台IQOO手机无法上网也就是ARP欺骗"><a href="#接下来我会让这台IQOO手机无法上网也就是ARP欺骗" class="headerlink" title="接下来我会让这台IQOO手机无法上网也就是ARP欺骗"></a>接下来我会让这台IQOO手机无法上网也就是ARP欺骗</h2><h3 id="攻击开始时kali会复制路由器的MAC地址并告诉被攻击方IQOO我才是路由器你应该把数据交给我并且在这过程中kali还会复制被攻击的MAC地址伪装成客户端重复刚才的操作告诉路由器我才是IQOO手机你应该把数据交给我。"><a href="#攻击开始时kali会复制路由器的MAC地址并告诉被攻击方IQOO我才是路由器你应该把数据交给我并且在这过程中kali还会复制被攻击的MAC地址伪装成客户端重复刚才的操作告诉路由器我才是IQOO手机你应该把数据交给我。" class="headerlink" title="攻击开始时kali会复制路由器的MAC地址并告诉被攻击方IQOO我才是路由器你应该把数据交给我并且在这过程中kali还会复制被攻击的MAC地址伪装成客户端重复刚才的操作告诉路由器我才是IQOO手机你应该把数据交给我。"></a>攻击开始时kali会复制路由器的MAC地址并告诉被攻击方IQOO我才是路由器你应该把数据交给我并且在这过程中kali还会复制被攻击的MAC地址伪装成客户端重复刚才的操作告诉路由器我才是IQOO手机你应该把数据交给我。</h3><p> 现在IQOO和路由器的数据都到kali来了我们需要设置kali，不让kali为他们转发数据，切换到kali的管理员终端，输入这条命令<br> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo 0 &gt; /proc/sys/net/ipv4/ip_forward # 1就是转发 0就是不转发</span><br></pre></td></tr></table></figure></p>
+<h3 id="接下来进行ARP欺骗"><a href="#接下来进行ARP欺骗" class="headerlink" title="接下来进行ARP欺骗"></a>接下来进行ARP欺骗</h3><p> 在kali上输入这条命令 -i指的是你的网卡 -t指的是你要欺骗的设备IP -r指需要欺骗的路由器IP<br> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arpspoof -i eth0 -t 192.168.0.105 -r 192.168.0.1</span><br></pre></td></tr></table></figure></p>
+<h3 id="请注意请不要将它用于任何非法用途"><a href="#请注意请不要将它用于任何非法用途" class="headerlink" title="请注意请不要将它用于任何非法用途"></a>请注意请不要将它用于任何非法用途</h3><p> <img src="image-3.png" alt="3"></p>
+<h3 id="现在我的IQOO已经无法上网-CTRL-C退出攻击-现在已经可以上网"><a href="#现在我的IQOO已经无法上网-CTRL-C退出攻击-现在已经可以上网" class="headerlink" title="现在我的IQOO已经无法上网 CTRL+C退出攻击 现在已经可以上网"></a>现在我的IQOO已经无法上网 CTRL+C退出攻击 现在已经可以上网</h3><p> <img src="image-4.png" alt="4"></p>
+<h1 id="再次声明请勿将本次实验用于非法用途且在非同意的情况下用于寝室，公司，学校。否则后果自负"><a href="#再次声明请勿将本次实验用于非法用途且在非同意的情况下用于寝室，公司，学校。否则后果自负" class="headerlink" title="再次声明请勿将本次实验用于非法用途且在非同意的情况下用于寝室，公司，学校。否则后果自负"></a><strong>再次声明请勿将本次实验用于非法用途且在非同意的情况下用于寝室，公司，学校。否则后果自负</strong></h1>
         
       </div>
 

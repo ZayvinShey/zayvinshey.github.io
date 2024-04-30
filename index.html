@@ -163,7 +163,7 @@
       
         <a class="archive-link" href="/archives/2024/04 ">
           四月 2024 
-          <div class="archive-count">1 </div>
+          <div class="archive-count">2 </div>
         </a>
       
     </div>
@@ -176,6 +176,12 @@
     <div class="widget">
       <h3 class="widget-title">最新文章</h3>
       <ul>
+        
+          <a class="recent-link" href="/2024/04/30/%E6%90%AD%E5%BB%BAHarbor%E4%BB%93%E5%BA%93/" title="搭建Harbor仓库" >
+            <div class="recent-link-text">
+              搭建Harbor仓库
+            </div>
+          </a>
         
           <a class="recent-link" href="/2024/04/30/ARP%E6%AC%BA%E9%AA%97/" title="ARP欺骗" >
             <div class="recent-link-text">
@@ -193,6 +199,81 @@
     </div>
     <div id="content-body">
       
+   
+
+
+<article id="post-搭建Harbor仓库" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+   
+  <div class="article-inner">
+    <div class="article-main">
+      <header class="article-header">
+        
+<div class="main-title-bar">
+  <div class="main-title-dot"></div>
+  
+    
+      <h1 itemprop="name">
+        <a class="p-name article-title" href="/2024/04/30/%E6%90%AD%E5%BB%BAHarbor%E4%BB%93%E5%BA%93/">搭建Harbor仓库</a>
+      </h1>
+    
+  
+</div>
+
+        <div class='meta-info-bar'>
+          <div class="meta-info">
+  <time class="dt-published" datetime="2024-04-30T11:37:22.000Z" itemprop="datePublished">2024-04-30</time>
+</div>
+          <div class="need-seperator meta-info">
+            <div class="meta-cate-flex">
+  
+    未分类 
+   
+</div>
+  
+          </div>
+          <div class="wordcount need-seperator meta-info">
+            4.2k 词 
+          </div>
+        </div>
+        
+      </header>
+      <div class="e-content article-entry" itemprop="articleBody">
+        
+          <div class="truncate-text">
+            
+              Harbor，我第一次接触他的时候看着他的logo是一个灯塔，以为是什么代理之类的东西，但是当我用过之后才知道他的强大。为什么Docker有储存库还要使用Harbor呢？Harbor是由VMware公司开源的容器仓库，但是Harbor是在Docker Registry上进行了企业级拓展，这些企业级特性包括：管理用户界面，基于角色的访问控制 ，AD&#x2F;LDAP集成以及审计日志等，并且Harbor能更好的与Kubernetes集成。
+首先先聊一下Harbor的企业级拓展，从安全的角度，企业的不同职位对镜像的要求不一样，举例来说，开发人员显然是要用于PUSH&#x2F;PULL的权限以更新和改正代码，测试人员只能拥有PULL的权限，而项目经理需要对上述的角色进行管理。Harbor不仅提供了一个良好的Web页面，还可以划分出不同的角色来保证仓库的安全性。
+Harbor为这种需求提供了用户和成员两种管理概念。
+在Harbor中，用户主要分为两类。一类为管理员，另一类为普通用户。两类用户都可以成为项目的成员。而管理员可以对用户进行管理。
+成员是对应于项目的概念，分为三类：管理员、开发...
+            
+          </div>
+        
+      </div>
+
+         
+    </div>
+    
+     
+    <a class="right-panel  non-pic  "
+      
+      href="/2024/04/30/%E6%90%AD%E5%BB%BAHarbor%E4%BB%93%E5%BA%93/" 
+    >
+       
+      <i class="fa-solid fa-angle-right non-pic"></i>
+       
+    </a>
+     
+  </div>
+  
+</article>
+
+
+
+
+
+
+
    
 
 

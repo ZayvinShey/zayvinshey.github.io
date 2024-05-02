@@ -1,0 +1,117 @@
+<hr>
+<h2 id="title-搭建Harbor仓库date-2024-04-30-19-37-22tags"><a href="#title-搭建Harbor仓库date-2024-04-30-19-37-22tags" class="headerlink" title="title: 搭建Harbor仓库date: 2024-04-30 19:37:22tags:"></a>title: 搭建Harbor仓库<br>date: 2024-04-30 19:37:22<br>tags:</h2><h1 id="Harbor，我第一次接触他的时候看着他的logo是一个灯塔，以为是什么代理之类的东西，但是当我用过之后才知道他的强大。"><a href="#Harbor，我第一次接触他的时候看着他的logo是一个灯塔，以为是什么代理之类的东西，但是当我用过之后才知道他的强大。" class="headerlink" title="Harbor，我第一次接触他的时候看着他的logo是一个灯塔，以为是什么代理之类的东西，但是当我用过之后才知道他的强大。"></a>Harbor，我第一次接触他的时候看着他的logo是一个灯塔，以为是什么代理之类的东西，但是当我用过之后才知道他的强大。</h1><h2 id="为什么Docker有储存库还要使用Harbor呢？"><a href="#为什么Docker有储存库还要使用Harbor呢？" class="headerlink" title="为什么Docker有储存库还要使用Harbor呢？"></a>为什么Docker有储存库还要使用Harbor呢？</h2><p>Harbor是由VMware公司开源的容器仓库，但是Harbor是在Docker Registry上进行了企业级拓展，这些企业级特性包括：管理用户界面，基于角色的访问控制 ，AD&#x2F;LDAP集成以及审计日志等，并且Harbor能更好的与Kubernetes集成。</p>
+<p>首先先聊一下Harbor的企业级拓展，从安全的角度，企业的不同职位对镜像的要求不一样，举例来说，开发人员显然是要用于PUSH&#x2F;PULL的权限以更新和改正代码，测试人员只能拥有PULL的权限，而项目经理需要对上述的角色进行管理。Harbor不仅提供了一个良好的Web页面，还可以划分出不同的角色来保证仓库的安全性。</p>
+<p>Harbor为这种需求提供了用户和成员两种管理概念。</p>
+<p>在Harbor中，用户主要分为两类。一类为管理员，另一类为普通用户。两类用户都可以成为项目的成员。而管理员可以对用户进行管理。</p>
+<p>成员是对应于项目的概念，分为三类：管理员、开发者、访客。管理员可以对开发者和访客作权限的配置和管理。测试和运维人员可以访客身份读取项目镜像，或者公共镜像库中的文件。</p>
+<p>从项目的角度出发，显然项目管理员拥有最大的项目权限，如果要对用户进行禁用或限权等，可以通过修改用户在项目中的成员角色来实现，甚至将用户移除出这个项目。</p>
+<h2 id="从这些角度来看Harbor在企业中的运用肯定比Docker-Registry多。"><a href="#从这些角度来看Harbor在企业中的运用肯定比Docker-Registry多。" class="headerlink" title="从这些角度来看Harbor在企业中的运用肯定比Docker Registry多。"></a>从这些角度来看Harbor在企业中的运用肯定比Docker Registry多。</h2><h1 id="接下来就是搭建Harbor环节"><a href="#接下来就是搭建Harbor环节" class="headerlink" title="接下来就是搭建Harbor环节"></a>接下来就是搭建Harbor环节</h1><h2 id="安装-docker-和-docker-compose"><a href="#安装-docker-和-docker-compose" class="headerlink" title="安装 docker 和 docker-compose"></a>安装 docker 和 docker-compose</h2><p>想要搭建Harbor我们就必须要用到 docker。 docker 安装比较简单</p>
+<h3 id="Centos"><a href="#Centos" class="headerlink" title="Centos"></a>Centos</h3><p>为了安装 Docker，我们需要首先安装yum-utils，以便添加 Docker 的源。</p>
+<pre><code>yum install -y yum-utils
+yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+</code></pre>
+<p>直接执行命令安装</p>
+<pre><code>yum install docker-ce docker-ce-cli containerd.io
+</code></pre>
+<p>docker不会自己启动需要手动启动</p>
+<pre><code>systemctl start docker
+systemctl enable docker #设置docker自启动
+</code></pre>
+<p>至此docker安装完成</p>
+<p>还需要安装 docker-compose 此条命令需手动修改安装版本</p>
+<pre><code>curl -L https://github.com/docker/compose/releases/download/1.24.1/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+</code></pre>
+<p>添加执行权限</p>
+<pre><code>chmod +x /usr/local/bin/docker-compose
+</code></pre>
+<p>检查docker-compose版本</p>
+<pre><code>docker-compose version
+</code></pre>
+<h3 id="Ubuntu"><a href="#Ubuntu" class="headerlink" title="Ubuntu"></a>Ubuntu</h3><p>首先添加Docker官方GPG密钥</p>
+<pre><code>apt-get update
+apt-get install ca-certificates curl
+install -m 0755 -d /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+chmod a+r /etc/apt/keyrings/docker.asc
+</code></pre>
+<p>将存储库添加到 Apt 源</p>
+<pre><code>echo \
+  &quot;deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+  $(. /etc/os-release &amp;&amp; echo &quot;$VERSION_CODENAME&quot;) stable&quot; | \
+  sudo tee /etc/apt/sources.list.d/docker.list &gt; /dev/null
+
+apt-get update
+</code></pre>
+<p>安装dockerh和docker-compose</p>
+<pre><code>apt-get install -y docker 
+apt-get install -y docker-compose
+</code></pre>
+<p>同样需要自启动</p>
+<pre><code>systemctl start docker
+systemctl enable docker
+</code></pre>
+<h2 id="安装Harbor服务-请注意我的harbor服务器ip是192-168-200-100"><a href="#安装Harbor服务-请注意我的harbor服务器ip是192-168-200-100" class="headerlink" title="安装Harbor服务 请注意我的harbor服务器ip是192.168.200.100"></a>安装Harbor服务 请注意我的harbor服务器ip是192.168.200.100</h2><p>下载 Harbor</p>
+<pre><code>wget https://github.com/goharbor/harbor/releases/download/v2.10.2/harbor-offline-installer-v2.10.2.tgz
+</code></pre>
+<p>解压</p>
+<pre><code>tar xf harbor-offline-installer-v2.10.2.tgz -C /usr/local/src/
+</code></pre>
+<p>创建和进入证书目录</p>
+<pre><code>mkdir -p /usr/local/src/harbor/certs
+cd /usr/local/src/harbor/certs
+</code></pre>
+<p>生成CA证书</p>
+<pre><code>openssl genrsa -out ca.key 4096
+openssl req -x509 -new -nodes -sha512 -days 3650 \
+        -subj &quot;/C=CN/ST=Beijing/L=Beijing/O=example/OU=Personal/CN=192.168.200.100&quot; \
+        -key /usr/local/src/harbor/certs/ca.key \
+        -out /usr/local/src/harbor/certs/ca.crt
+</code></pre>
+<p>生成服务器证书</p>
+<pre><code>openssl genrsa -out myharbor.key 4096
+openssl req -sha512 -new \
+    -subj &quot;/C=CN/ST=Beijing/L=Beijing/O=example/OU=Personal/CN=192.168.200.100&quot; \
+    -key /usr/local/src/harbor/certs/myharbor.key \
+    -out /usr/local/src/harbor/certs/myharbor.csr
+
+cat &gt; v3.ext &lt;&lt;-EOF
+authorityKeyIdentifier=keyid,issuer
+basicConstraints=CA:FALSE
+keyUsage = digitalSignature, nonRepudiation, keyEncipherment, dataEncipherment
+extendedKeyUsage = serverAuth
+subjectAltName = @alt_names
+
+[alt_names]
+IP.1=192.168.200.100
+EOF
+openssl x509 -req -sha512 -days 3650 \
+    -extfile /usr/local/src/harbor/certs/v3.ext \
+    -CA /usr/local/src/harbor/certs/ca.crt -CAkey /usr/local/src/harbor/certs/ca.key -CAcreateserial \
+    -in /usr/local/src/harbor/certs/myharbor.csr \
+    -out /usr/local/src/harbor/certs/myharbor.crt
+openssl x509 -inform PEM -in /usr/local/src/harbor/certs/myharbor.crt -out /usr/local/src/harbor/certs/harbor.cert
+</code></pre>
+<p>创建harbor配置文件</p>
+<pre><code>cp /usr/local/src/harbor/harbor.yml.tmpl /usr/local/src/harbor/harbor.yml
+</code></pre>
+<p>更新harbor配置文件中的主机名和证书路径</p>
+<pre><code>sed -i &quot;s/hostname: reg.mydomain.com/hostname: 192.168.200.100/g&quot; /usr/local/src/harbor/harbor.yml
+sed -i &quot;s|certificate: /your/certificate/path|certificate: /usr/local/src/harbor/certs/myharbor.crt|g&quot; /usr/local/src/harbor/harbor.yml
+sed -i &quot;s|private_key: /your/private/key/path|private_key: /usr/local/src/harbor/certs/myharbor.key|g&quot; /usr/local/src/harbor/harbor.yml
+</code></pre>
+<p>给docker添加证书并重启docker</p>
+<pre><code>mkdir -p /etc/docker/certs.d/192.168.200.100/ 
+cp /usr/local/src/harbor/certs/myharbor.crt /etc/docker/certs.d/192.168.200.100/
+systemctl restart docker
+</code></pre>
+<p>安装Harbor</p>
+<pre><code>cd /usr/local/src/harbor
+./install.sh --with-trivy
+</code></pre>
+<p>查看docker-compose</p>
+<pre><code>docker-compose -f ./docker-compose.yaml ps
+</code></pre>
+<p>至此Harbor已经搭建完成并对接docker</p>
+<pre><code>docker login 192.168.200.100
+账户admin 密码Harbor12345
+</code></pre>
